@@ -5,6 +5,15 @@ spring:
   application:
     name: TASK-SUBMISSION-SERVICE
 
+  config:
+    import: optional:configserver:http://localhost:8080/
+
+  profiles:
+    active: prod
+
+
+
+  # database
 
   jpa:
     hibernate:
@@ -22,6 +31,8 @@ spring:
     password: 1111
     url: jdbc:mysql://localhost:3306/TaskSubmissionService
 
+# Eureka Client
+
 eureka:
   client:
     service-url:
@@ -31,5 +42,20 @@ eureka:
 
   instance:
     prefer-ip-address: true
+
+
+# Zipkin
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+
+# Config-Client
+
+
+
+
 
 

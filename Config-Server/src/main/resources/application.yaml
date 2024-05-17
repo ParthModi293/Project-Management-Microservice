@@ -1,0 +1,31 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Config-Server
+
+
+# config server
+
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ParthModi293/Application-Config-ProjectManagementMicroservice/
+
+
+
+# Eureka client
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8070/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    prefer-ip-address: true
+
