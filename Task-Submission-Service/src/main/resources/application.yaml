@@ -9,11 +9,11 @@ spring:
 
 # config-client
 
-  config:
-    import: optional:configserver:http://localhost:8080/
-
-  profiles:
-    active: prod
+#  config:
+#    import: optional:configserver:http://localhost:5004
+#
+#  profiles:
+#    active: default
 
 
 
@@ -56,7 +56,89 @@ management:
       probability: 1.0
 
 
-# Config-Client
+  # Actuator
+
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+  endpoint:
+    health:
+      show-details: always
+
+  health:
+    circuitbreakers:
+      enabled: true
+
+
+
+
+
+# Circuit Breaker
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      taskBreaker:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        wait-duration-in-open-state: 10s
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        sliding-window-type: count_based
+
+
+
+# Rate Limiter
+
+resilience4j.ratelimiter:
+    instances:
+      taskBreaker:
+        limit-refresh-period: 4s
+        limit-for-period: 2
+        timeout-duration: 0s
+
+
+
+
+
+
+
+  # retry Module of circuit breaker
+
+resilience4j.retry:
+    instances:
+      taskBreaker:
+        max-attempts: 3
+        wait-duration: 1s
+
+
+
+# Rate-Limiter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
