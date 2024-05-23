@@ -4,35 +4,35 @@ server:
 
 spring:
   application:
-    name: GATEWAY-SERVICE
+    name: gateway
 
   cloud:
     gateway:
       routes :
 
-        - id: USER-SERVICE
+        - id: user_service
           uri:
-            lb://USER-SERVICE
+            http://user:5001
           predicates:
             - Path=/auth/**, /users/**, /api/users/**, /
 
-        - id: TASK-SERVICE
+        - id: task_service
           uri:
-            lb://TASK-SERVICE
+            http://task:5002
           predicates:
             - Path=/tasks/**, /api/tasks/**
 
-        - id: TASK-SUBMISSION-SERVICE
+        - id: task_submission_service
           uri:
-            lb://TASK-SUBMISSION-SERVICE
+            http://submission:5003
           predicates:
             - Path=/submissions/**, /api/submissions/**
 
 # for Eureka Server
 
-        - id: Eureka-Server
+        - id: eurekaserver
           uri:
-            http://localhost:8070
+            http://servicereg:8070
           predicates:
             - Path=/eureka/main
           filters:
@@ -42,7 +42,7 @@ spring:
 
         - id: Eureka-Server-static
           uri:
-            http://localhost:8070
+            http://servicereg:8070
           predicates:
             - Path=/eureka/**
 
@@ -64,7 +64,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://servicereg:8070/eureka/
     fetch-registry: true
     register-with-eureka: true
 

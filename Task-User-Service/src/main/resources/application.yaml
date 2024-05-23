@@ -1,8 +1,11 @@
-TASK-SUBMISSION-SERVICE.url: http://localhost:5003
+task_submission_service:
+  url: http://localhost:5003
 
-TASK-SERVICE.url: http://localhost:5002
+task_service:
+  url: http://localhost:5002
 
-USER-SERVICE.url:  http://localhost:5001
+user_service:
+  url:  http://localhost:5001
 
 
 server:
@@ -10,7 +13,7 @@ server:
 
 spring:
   application:
-    name: USER-SERVICE
+    name: user_service
 
 
   jpa:

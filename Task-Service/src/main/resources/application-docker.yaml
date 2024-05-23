@@ -1,9 +1,12 @@
+task_submission_service:
+  url: http://submission:5003
 
-TASK-SUBMISSION-SERVICE.url: http://submission:5003
+task_service:
+  url: http://task:5002
 
-TASK-SERVICE.url: http://task:5002
+user_service:
+  url:  http://user:5001
 
-USER-SERVICE.url:  http://user:5001
 
 server:
   port: 5002
@@ -25,9 +28,14 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
 
+#we have to changed to mongodb
+
     username: root
     password: 1111
     url: jdbc:mysql://MySQL:3306/UserService
+
+
+
 
 eureka:
   client:

@@ -1,8 +1,11 @@
-TASK-SUBMISSION-SERVICE.url: http://localhost:5003
+task_submission_service:
+  url: http://localhost:5003
 
-TASK-SERVICE.url: http://localhost:5002
+task_service:
+  url: http://localhost:5002
 
-USER-SERVICE.url:  http://localhost:5001
+user_service:
+  url:  http://localhost:5001
 
 
 
@@ -11,7 +14,7 @@ server:
 
 spring:
   application:
-    name: TASK-SUBMISSION-SERVICE
+    name: task_submission_service
 
 
 
@@ -41,7 +44,15 @@ spring:
 
     username: root
     password: 1111
-    url: jdbc:mysql://mysql:3306/TaskSubmissionService
+    url: jdbc:mysql://localhost:3306/TaskSubmissionService
+
+
+#spring:
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/mydatabase
+#      username: myUsername
+#      password: myPassword
 
 # Eureka Client
 

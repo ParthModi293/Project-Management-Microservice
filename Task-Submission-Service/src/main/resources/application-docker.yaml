@@ -1,9 +1,11 @@
+task_submission_service:
+  url: http://submission:5003
 
-TASK-SUBMISSION-SERVICE.url: http://submission:5003
+task_service:
+  url: http://task:5002
 
-TASK-SERVICE.url: http://task:5002
-
-USER-SERVICE.url:  http://user:5001
+user_service:
+  url:  http://user:5001
 
 
 
@@ -12,17 +14,16 @@ server:
 
 spring:
   application:
-    name: TASK-SUBMISSION-SERVICE
+    name: task_submission_service
 
 
 
-  # config-client
+  # config-server
 
   config:
-    import: optional:configserver:http://config-server:5004
+    import: optional:configserver:http://config-server-ms:5004
 
-  profiles:
-    active: default
+
 
 
 
