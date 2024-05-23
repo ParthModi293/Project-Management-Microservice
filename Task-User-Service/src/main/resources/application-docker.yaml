@@ -1,0 +1,51 @@
+TASK-SUBMISSION-SERVICE.url: http://submission:5003
+
+TASK-SERVICE.url: http://task:5002
+
+USER-SERVICE.url:  http://user:5001
+
+
+server:
+  port: 5001
+
+spring:
+  application:
+    name: USER-SERVICE
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+
+    username: root
+    password: 1111
+    url: jdbc:mysql://MySQL:3306/TaskUserService
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://serviceregistry:8070/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    prefer-ip-address: true
+
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans

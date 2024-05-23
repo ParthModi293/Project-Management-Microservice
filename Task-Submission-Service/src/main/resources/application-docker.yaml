@@ -1,0 +1,160 @@
+
+TASK-SUBMISSION-SERVICE.url: http://submission:5003
+
+TASK-SERVICE.url: http://task:5002
+
+USER-SERVICE.url:  http://user:5001
+
+
+
+server:
+  port: 5003
+
+spring:
+  application:
+    name: TASK-SUBMISSION-SERVICE
+
+
+
+  # config-client
+
+  config:
+    import: optional:configserver:http://config-server:5004
+
+  profiles:
+    active: default
+
+
+
+  # database
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+
+    username: root
+    password: 1111
+    url: jdbc:mysql://MySQL:3306/TaskSubmissionService
+
+# Eureka Client
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://serviceregistry:8070/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+
+  instance:
+    prefer-ip-address: true
+
+
+# Zipkin
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+
+  # Actuator
+
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+  endpoint:
+    health:
+      show-details: always
+
+  health:
+    circuitbreakers:
+      enabled: true
+
+
+
+
+
+# Circuit Breaker
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      taskBreaker:
+        register-health-indicator: true
+        sliding-window-size: 10
+        minimum-number-of-calls: 5
+        permitted-number-of-calls-in-half-open-state: 3
+        wait-duration-in-open-state: 10s
+        failure-rate-threshold: 50
+        automatic-transition-from-open-to-half-open-enabled: true
+        sliding-window-type: count_based
+
+
+
+# Rate Limiter
+
+resilience4j.ratelimiter:
+  instances:
+    taskBreaker:
+      limit-refresh-period: 4s
+      limit-for-period: 2
+      timeout-duration: 0s
+
+
+
+
+
+
+
+  # retry Module of circuit breaker
+
+resilience4j.retry:
+  instances:
+    taskBreaker:
+      max-attempts: 3
+      wait-duration: 1s
+
+
+
+# Rate-Limiter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

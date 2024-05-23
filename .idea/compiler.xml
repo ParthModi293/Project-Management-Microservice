@@ -17,7 +17,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Config-Server" target="17" />
-      <module name="Eureka-Server" target="17" />
+      <module name="Eureka-Server" target="19" />
       <module name="GateWay" target="17" />
       <module name="Task-Service" target="17" />
       <module name="Task-Submission-Service" target="17" />

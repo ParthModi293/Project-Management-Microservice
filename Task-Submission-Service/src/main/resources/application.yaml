@@ -1,3 +1,11 @@
+TASK-SUBMISSION-SERVICE.url: http://localhost:5003
+
+TASK-SERVICE.url: http://localhost:5002
+
+USER-SERVICE.url:  http://localhost:5001
+
+
+
 server:
   port: 5003
 
@@ -9,11 +17,11 @@ spring:
 
 # config-client
 
-#  config:
-#    import: optional:configserver:http://localhost:5004
-#
-#  profiles:
-#    active: default
+  config:
+    import: optional:configserver:http://localhost:5004
+
+  profiles:
+    active: default
 
 
 
@@ -33,14 +41,14 @@ spring:
 
     username: root
     password: 1111
-    url: jdbc:mysql://localhost:3306/TaskSubmissionService
+    url: jdbc:mysql://mysql:3306/TaskSubmissionService
 
 # Eureka Client
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://servicereg:8070/eureka/
     fetch-registry: true
     register-with-eureka: true
 
